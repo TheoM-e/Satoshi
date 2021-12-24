@@ -1,0 +1,5 @@
+{
+  "status_type": "playing/streaming/listening/watching",
+  "status": "Your custom status here",
+  "prefix": "!"
+}
