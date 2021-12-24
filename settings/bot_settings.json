@@ -1,5 +1,5 @@
 {
-  "status_type": "playing/streaming/listening/watching",
+  "status_type": "playing",
   "status": "Your custom status here",
-  "prefix": "!"
+  "channel_id": 923678011595825152
 }
