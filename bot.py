@@ -107,18 +107,25 @@ def return_symbols():
     i = []
     with open('settings/tokens.json') as tokenList:
         tokens = json.load(tokenList)
-    for x in tokens:
-        i.append([x, tokens[x]])
-    return i
+    if len(tokens) > 0:
+        for x in tokens:
+            i.append([x, tokens[x]])
+        return i
+    else:
+        i.append(['BTC', 'USDT'])
+        return i
 
 
 # Return a list with prices based on the 2 crypto symbols in parameters
 def return_prices(crypt1, crypt2):
-    with urllib.request.urlopen(
-            'https://www.binance.com/api/v3/ticker/price?symbol=' + crypt1.upper() + crypt2.upper()) as url:
-        data = json.loads(url.read().decode())
-    # list format: [Symbol , price]
-    return [data[list(data)[0]], format(float(data[list(data)[1]]), ".2f")]
+    try:
+        with urllib.request.urlopen(
+                'https://www.binance.com/api/v3/ticker/price?symbol=' + crypt1.upper() + crypt2.upper()) as url:
+            data = json.loads(url.read().decode())
+        # list format: [Symbol , price]
+        return [data[list(data)[0]], format(float(data[list(data)[1]]), ".2f")]
+    except urllib.error.HTTPError:
+        raise InvalidType("Invalid crypto or invalid symbols in ./settings/tokens.json")
 
 
 # Raised error if incorrect status type in settings
