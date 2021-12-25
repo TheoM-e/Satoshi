@@ -1,0 +1,6 @@
+{
+  "status_type": "playing/watching/streaming/listening",
+  "status": "Your custom status here",
+  "channel_id": 923678011595825152,
+  "interval": 5
+}

@@ -4,6 +4,7 @@ import urllib.request
 import discord
 
 client = discord.Client()
+oldPrices = {'isFirstLoop': True}
 
 # Get discord token from ./key/discord_token.key
 # discord_token.key must only contain your token
@@ -11,7 +12,7 @@ with open('keys/discord_token.key') as file:
     TOKEN = file.read()
 
 # Get bot settings => ./settings/bot_settings.json
-with open('settings/bot_settings.json') as file:
+with open('settings/settings.json') as file:
     settings = json.load(file)
 
 
@@ -24,6 +25,57 @@ async def on_ready():
             name=get_status(settings['status_type'])[1]
         )
     )
+
+    with open('settings/settings.json') as param:
+        param = json.load(param)
+        channel_id = param['channel_id']
+        interval = param['interval']
+
+    if isinstance(channel_id, str):
+        try:
+            channel_id = int(channel_id)
+        except ValueError:
+            raise InvalidType("Invalid channel id, please use int")
+
+    while True:
+        channel = client.get_channel(channel_id)
+        await channel.send(embed=symbols_to_embed(return_symbols()))
+        time.sleep(interval * 60)
+
+
+def symbols_to_embed(symbolsList):
+    prices = []
+
+    with open('settings/settings.json') as param:
+        interval = json.load(param)['interval']
+
+    if isinstance(interval, str):
+        try:
+            interval = int(interval)
+        except ValueError:
+            raise InvalidType("Invalid interval, please use int")
+
+    for x in symbolsList:
+        prices.append([(str(x[0]) + str(x[1])).upper(), return_prices(str(x[0]), str(x[1]))[1]])
+
+    if oldPrices['isFirstLoop']:
+        oldPrices['isFirstLoop'] = False
+        for x in prices:
+            oldPrices[str(x[0])] = str(x[1])
+
+    t = time.localtime()
+    current_time = time.strftime("%D %H:%M:%S", t)
+
+    embed = discord.Embed(title="Prices ~ [m" + str(interval) + "]",
+                          description=current_time, color=0xFF8008)
+    embed.set_author(name="SatoshiNakamoto",
+                     icon_url='https://cdn.discordapp.com/avatars/923323366197301278/8cc23d15abd47fbc1e0b7dc95dae2c38.webp?size=80')
+
+    for x in prices:
+        embed.add_field(name=str(x[0]),
+                        value='$' + str(x[1]) + ' ~ ' + '[' + get_improvement(oldPrices[x[0]], x[1]) + ']')
+        oldPrices[str(x[0])] = str(x[1])
+    return embed
 
 
 # Return status & status type from bot_settings.json
@@ -40,13 +92,24 @@ def get_status(type):
         raise UnknowStatusType("Status type must be: playing/streaming/listening/watching")
 
 
+def get_improvement(old, new):
+    old = float(old)
+    new = float(new)
+    i = ((new - old) / old) * 100.0
+    i = format(i, ".2f")
+    if new >= old:
+        return '+' + str(i) + '%'
+    else:
+        return str(i) + '%'
+
+
 def return_symbols():
     i = []
     with open('settings/tokens.json') as tokenList:
         tokens = json.load(tokenList)
     for x in tokens:
-        i.append([x,tokens[x]])
-    print(i)
+        i.append([x, tokens[x]])
+    return i
 
 
 # Return a list with prices based on the 2 crypto symbols in parameters
@@ -64,7 +127,9 @@ class UnknowStatusType(Exception):
         super().__init__(error)
 
 
-return_symbols()
+class InvalidType(Exception):
+    def __init__(self, error):
+        super().__init__(error)
 
 
 client.run(TOKEN)
