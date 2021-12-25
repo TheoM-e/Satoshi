@@ -29,6 +29,8 @@ After installing Python 3:
   - Finaly, in `'"interval": '` you have to choose the delay in minutes you want for your bot to send prices.
   /!\ IMPORTANT: `'"channel_id": '` & `'"interval": '` must be in int, not str so you dont have to put `""` around the value of these ones.
 
+- To choose which crypto you want to track, open the `./settings/tokens.json` then you can add / remove cryptos by following the default template
+
 - Then you'll have to run the bot:
     - Windows:
     ```bash
