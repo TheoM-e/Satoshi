@@ -3,7 +3,6 @@ import time
 import urllib.request
 import discord
 
-
 client = discord.Client()
 
 # Dictionary that keep the previous cryptos prices to
