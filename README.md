@@ -42,5 +42,5 @@ After installing Python 3:
     ```
 ## Authors
 
-- [@TheoMesse](https://www.github.com/TheoMesse)
+- [@TheoM-e](https://www.github.com/TheoM-e)
 
