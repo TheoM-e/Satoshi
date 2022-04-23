@@ -7,22 +7,22 @@ It doesn't need any skills, anyone can use, you only have to edit json files.
 
 ## How to use ?
 🔹 After installing Python 3:
-🔸 You'll need to clone the Github repository:
+- You'll need to clone the Github repository:
 ```bash
   git clone https://github.com/TheoMesse/Satoshi-DiscordCryptoBot.git
 ```
 
-🔸 Then go in the directory and type:
+- Then go in the directory and type:
 
 ```bash
   pip install -r requirements.txt
 ```
-🔸 Then you'll have to copy your discord bot token and paste it in:
+- Then you'll have to copy your discord bot token and paste it in:
 
 ```
   ./keys/discord_token.key
 ```
-🔸 Then open the `./settings/settings.json` file:\
+- Then open the `./settings/settings.json` file:\
   - In `'"status_type": '` you have to enter the status type you want: "playing" or "watching" or "listening" or "streaming",`\
   - In `'"status": '` you can enter whatever you want, it's the status that'll be displayed,
   - In `'"channel_id": '` you must enter the id of the channel where you want to track prices, for that you have to enable discord devmod and right-click on the channel then "Copy ID",
@@ -31,7 +31,7 @@ It doesn't need any skills, anyone can use, you only have to edit json files.
 
 - To choose which crypto you want to track, open the `./settings/tokens.json` then you can add / remove cryptos by following the default template
 
-🔸 Then you'll have to run the bot:
+- Then you'll have to run the bot:
     - Windows:
     ```bash
     python bot.py
