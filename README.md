@@ -1,7 +1,7 @@
 
 # Satoshi ~ DiscordCryptoBot
 
-Satoshi is a simple python discord bot using discord.py that allow you to track your favorites cryptos prices with your own bot. 
+📊 Satoshi is a simple python discord bot using discord.py that allow you to track your favorites cryptos prices with your own bot. 
 It doesn't need any skills, anyone can use, you only have to edit json files.
 
 
