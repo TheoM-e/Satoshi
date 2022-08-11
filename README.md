@@ -20,7 +20,7 @@ It doesn't need any skills, anyone can use, you only have to edit json files.
 - Then you'll have to copy your discord bot token and paste it in:
 
 ```
-  ./keys/discord_token.key
+  keys/discord_token.key
 ```
 - Then open the `./settings/settings.json` file:\
   - In `'"status_type": '` you have to enter the status type you want: "playing" or "watching" or "listening" or "streaming",`\
