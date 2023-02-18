@@ -22,7 +22,7 @@ It doesn't need any skills, anyone can use, you only have to edit json files.
 ```
   keys/discord_token.key
 ```
-- Then open the `settings/settings.json` file:\
+- Then open the `settings/settings.json` file:
   - In `'"status_type": '` you have to enter the status type you want: "playing" or "watching" or "listening" or "streaming",`\
   - In `'"status": '` you can enter whatever you want, it's the status that'll be displayed,
   - In `'"channel_id": '` you must enter the id of the channel where you want to track prices, for that you have to enable discord devmod and right-click on the channel then "Copy ID",
